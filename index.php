@@ -2,7 +2,7 @@
 declare(strict_types=1);
 
 
-// useful when script is being executed by cron user
+// useful when script is being executed Cron
 $pathPrefix = ''; // e.g. /usr/share/nginx/oci-arm-host-capacity/
 
 require "{$pathPrefix}vendor/autoload.php";
