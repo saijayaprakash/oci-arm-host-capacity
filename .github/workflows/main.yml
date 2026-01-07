@@ -1,9 +1,9 @@
 name: OCI ARM Grabber
 
 on:
-  workflow_dispatch: # Allows manual run
+  workflow_dispatch:
   schedule:
-    - cron: '*/5 * * * *' # Auto-run every 5 minutes
+    - cron: '*/5 * * * *'
 
 jobs:
   grab-instance:
@@ -21,21 +21,23 @@ jobs:
         run: composer install
 
       - name: Create Key File
-        # This takes your secret and turns it into a real file for the PHP script
         run: echo "${{ secrets.OCI_PRIVATE_KEY }}" > private_key.pem
 
       - name: Run Script
         env:
+          # Critical: These names must match the script's internal logic
           OCI_REGION: ${{ secrets.OCI_REGION }}
           OCI_USER_ID: ${{ secrets.OCI_USER_ID }}
           OCI_TENANCY_ID: ${{ secrets.OCI_TENANCY_ID }}
           OCI_KEY_FINGERPRINT: ${{ secrets.OCI_FINGERPRINT }}
           OCI_SUBNET_ID: ${{ secrets.OCI_SUBNET_ID }}
           OCI_SSH_PUBLIC_KEY: ${{ secrets.OCI_SSH_PUBLIC_KEY }}
-          OCI_IMAGE_ID: 'ocid1.image.oc1.ap-hyderabad-1.aaaaaaaakw5v...' # Update this if needed
-          # This tells the Hitrov script to use the file we created in the previous step
-          OCI_PRIVATE_KEY_FILENAME: './private_key.pem' 
-          OCI_AVAILABILITY_DOMAIN: 'Vgss:AP-HYDERABAD-1-AD-1'
+          OCI_IMAGE_ID: 'ocid1.image.oc1.ap-hyderabad-1.aaaaaaaakw5v...' # Double-check your actual OCID
+          OCI_PRIVATE_KEY_FILENAME: './private_key.pem'
+          
+          # Adding the missing Shape and Resource variables
+          OCI_SHAPE: 'VM.Standard.A1.Flex'
           OCI_OCPUS: 4
           OCI_MEMORY_IN_GBS: 24
+          OCI_AVAILABILITY_DOMAIN: 'Vgss:AP-HYDERABAD-1-AD-1'
         run: php index.php
