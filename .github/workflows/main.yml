@@ -32,7 +32,7 @@ jobs:
           OCI_KEY_FINGERPRINT: ${{ secrets.OCI_FINGERPRINT }}
           OCI_SUBNET_ID: ${{ secrets.OCI_SUBNET_ID }}
           OCI_SSH_PUBLIC_KEY: ${{ secrets.OCI_SSH_PUBLIC_KEY }}
-          OCI_IMAGE_ID: 'ocid1.image.oc1.ap-hyderabad-1.aaaaaaaakw5v...' # Double-check your actual OCID
+          OCI_IMAGE_ID: 'ocid1.image.oc1.ap-hyderabad-1.aaaaaaaaca7s2s5pgnooszcjysi7pknrimayqjds6knvjascphe2r767m6vq'
           OCI_PRIVATE_KEY_FILENAME: './private_key.pem'
           
           # Adding the missing Shape and Resource variables
