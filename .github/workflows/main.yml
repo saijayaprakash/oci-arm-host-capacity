@@ -3,7 +3,7 @@ name: OCI ARM Grabber
 on:
   workflow_dispatch:
   schedule:
-    - cron: '*/2 * * * *'
+    - cron: '*/5 * * * *'
 
 jobs:
   grab-instance:
